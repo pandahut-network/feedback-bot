@@ -3,6 +3,8 @@ const blue = "#06B6D4";
 const red = "#EF4444";
 const green = "#22C55E";
 
+//test commands
+
 exports.help = (commands) => {
     const embed = new Discord.MessageEmbed().setTitle("Commands List").setColor(blue);
     for (const command of commands) embed.addField(command.title, command.description, false);
@@ -41,10 +43,10 @@ exports.updateOffset = (offset) => {
 exports.remindersList = (reminders, offset) => {
 
     const embed = new Discord.MessageEmbed().setColor(blue).setTitle("Reminders List");
-    if(reminders.length === 0) embed.setDescription("There are no active reminders.");
+    if (reminders.length === 0) embed.setDescription("There are no active reminders.");
     else reminders.forEach((reminder, idx) => {
-      
-        embed.addField("Date", dateStr(reminder.date+offset*60*60*1000), true);
+
+        embed.addField("Date", dateStr(reminder.date + offset * 60 * 60 * 1000), true);
         embed.addField("Message", `${reminder.msg}`, true);
         embed.addField("ID", idx, true);
     });
@@ -53,16 +55,16 @@ exports.remindersList = (reminders, offset) => {
 //takes in any date and shows the datestring in utc
 
 const dateStr = (d) => {
-  var date = new Date(d);
-  var h = date.getHours(), v = "AM";
-  if(h >= 12) v = "PM";
-  if(h > 12) h -= 12;
-  if(h == 0) h += 12;
-  return `${h}:${pad(date.getMinutes(), 2)} ${v} ${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`;
-}
+    var date = new Date(d);
+    var h = date.getHours(), v = "AM";
+    if (h >= 12) v = "PM";
+    if (h > 12) h -= 12;
+    if (h == 0) h += 12;
+    return `${h}:${pad(date.getMinutes(), 2)} ${v} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+};
 
 const pad = (num, size) => {
     num = num.toString();
     while (num.length < size) num = "0" + num;
     return num;
-}
+};
